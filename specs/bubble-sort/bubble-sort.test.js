@@ -15,17 +15,18 @@ function bubbleSort(nums) {
   // takes an array, compares 2 inecies, if the first is bigger, swap them
   // if no swaps has been made during the current run, exit
   let swapMade = true
+  let bubbleCount = 0
   while (swapMade === true) {
     swapMade = false
-    for (let i = 0; i < nums.length; i++) {
+    for (let i = 0; i < nums.length - bubbleCount; i++) {
       if (nums[i] > nums[i + 1]) {
         let temp = nums[i]
         nums[i] = nums[i + 1]
         nums[i + 1] = temp
         swapMade = true
       }
-      console.log(nums)
     }
+    bubbleCount++
   }
   return nums
 }

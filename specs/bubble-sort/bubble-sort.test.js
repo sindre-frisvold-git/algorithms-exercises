@@ -14,7 +14,7 @@ function bubbleSort(nums) {
   // code goes
   // takes an array, compares 2 inecies, if the first is bigger, swap them
   // if no swaps has been made during the current run, exit
-  let swapMade
+  let swapMade = true
   while (swapMade === true) {
     swapMade = false
     for (let i = 0; i < nums.length; i++) {

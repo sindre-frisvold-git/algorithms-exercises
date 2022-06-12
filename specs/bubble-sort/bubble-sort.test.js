@@ -11,7 +11,13 @@
 */
 
 function bubbleSort(nums) {
-  // code goes here
+  // code goes 
+  // takes an array, compares 2 inecies, if the first is bigger, swap them
+  // if no swaps has been made during the current run, exit
+}
+
+function swap(a, b){
+  const temp 
 }
 
 // unit tests

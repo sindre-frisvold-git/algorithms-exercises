@@ -17,6 +17,7 @@ function quickSort(nums) {
   const pivot = nums.pop()
   const left = []
   const right = []
+  // could swap with for loop to length -1 to avoid pop() call
   for (let num of nums) {
     if (num < pivot) {
       left.push(num)

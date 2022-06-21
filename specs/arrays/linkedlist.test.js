@@ -26,23 +26,31 @@
 class LinkedList {
   constructor() {
     this.length = 0
-    this.data = {}
     this.head = null
     this.tail = null
   }
   push(value) {
-    const newNode = new Node(this.head, null, value)
-    this.data[this.length] = newNode
+    const newNode = new Node(value)
     this.length++
-    if (this.tail === null) this.tail = newNode
+    const prevTail = this.tail
+    if (this.head === null) {
+      this.head = newNode
+    } else {
+      this.tail.next = newNode
+    }
+    this.tail = newNode
+    this.tail.prev = prevTail
+    // this.data[this.length] = newNode
+    // this.length++
+    // if (this.tail === null) this.tail = newNode
   }
   pop() {
-    const node = this.data[this.length - 1]
+    const node = this.tail
     const value = node.value
     node.prev.next = null
-    delete this.data[this.length - 1]
     this.length--
-    return value
+    this.tail = node.prev
+    return node.value
     // delete last index
     // remove pointer to last node from new last node
   }

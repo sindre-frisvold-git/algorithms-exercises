@@ -62,7 +62,23 @@ class Tree {
       // insert rotate logic here
     }
   }
-  _checkBalance(path) {}
+  _checkBalance(path) {
+    for (let i = path.length - 1; i > 0; i--) {
+      console.log(this._checkDepth(path[i]))
+    }
+    // start at end of path, check balance
+    // ? recursive call
+  }
+  _checkDepth(node) {
+    // checks depth of a diven node
+    if (!node.left && !node.right) return 0
+    if (!node.left) return this._checkDepth(node.right) + 1
+    if (!node.right) return this._checkDepth(node.left) + 1
+    const left = this._checkDepth(node.left)
+    const right = this._checkDepth(node.right)
+    return left < right ? right + 1 : left + 1
+  }
+  _rotate() {}
 }
 
 class Node {

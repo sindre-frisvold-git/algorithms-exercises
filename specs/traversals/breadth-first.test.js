@@ -1,58 +1,72 @@
 const breadthFirstTraverse = (queue, array) => {
+  // take first item in queue
+  if (!queue.length) return array
+  const node = queue.shift()
+  array.push(node.value)
+  if (node.left) {
+    queue.push(node.left)
+  }
+  if (node.right) {
+    queue.push(node.right)
+  }
+  return breadthFirstTraverse(queue, array)
+  // add value to array
+  // add left and right child to queue
+  // shift array and call recursion on returned node
   // fill code in here
-};
+}
 
 // unit tests
 // do not modify the below code
-describe.skip("breadth-first tree traversal", function () {
-  const answer = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"];
+describe('breadth-first tree traversal', function () {
+  const answer = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
 
   const tree = {
-    value: "A",
+    value: 'A',
     left: {
-      value: "B",
+      value: 'B',
       left: {
-        value: "D",
+        value: 'D',
         left: {
-          value: "G",
+          value: 'G',
           left: null,
-          right: null
+          right: null,
         },
-        right: null
+        right: null,
       },
       right: {
-        value: "E",
+        value: 'E',
         left: null,
         right: {
-          value: "H",
+          value: 'H',
           left: {
-            value: "K",
+            value: 'K',
             left: null,
-            right: null
-          }
-        }
-      }
+            right: null,
+          },
+        },
+      },
     },
     right: {
-      value: "C",
+      value: 'C',
       left: {
-        value: "F",
+        value: 'F',
         left: {
-          value: "I",
+          value: 'I',
           left: null,
-          right: null
+          right: null,
         },
         right: {
-          value: "J",
+          value: 'J',
           left: null,
-          right: null
-        }
+          right: null,
+        },
       },
-      right: null
-    }
-  };
+      right: null,
+    },
+  }
 
-  test("breadthFirstTraverse", () => {
-    expect(breadthFirstTraverse([tree], [])).toEqual(answer);
-  });
-});
+  test('breadthFirstTraverse', () => {
+    expect(breadthFirstTraverse([tree], [])).toEqual(answer)
+  })
+})

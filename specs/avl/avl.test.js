@@ -188,6 +188,41 @@ class Node {
       }
       this.height = this.right.height + 1
     }
+    this.balance()
+  }
+  balance() {
+    if (this.left) {
+      if (this.left.height > 1) {
+        if (this.left.left) {
+          this.rotateLL()
+        } else {
+          this.left.rotateRR()
+          this.rotateLL()
+        }
+      }
+    }
+    if (this.right) {
+      if (this.right.height > 1) {
+        if (this.right.right) {
+          this.rotateRR()
+        } else {
+          this.right.rotateLL()
+          this.rotateRR()
+        }
+      }
+    }
+    // check if node is out of balance
+    // if not out of balance, return
+    // if out of balance, check if need single or double rotate
+  }
+  rotateRR() {
+    // rotate
+  }
+  rotateLL() {
+    // rotate
+  }
+  updateInNewLocation() {
+    // calculate new height
   }
 }
 

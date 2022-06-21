@@ -26,7 +26,7 @@ class Tree {
     this.root = null
   }
   add(value) {
-    if ((this.root = nuill)) {
+    if (this.root === null) {
       this.root = new Node(value)
     } else {
       const path = []
@@ -58,27 +58,63 @@ class Tree {
           }
         }
       }
+      this._checkBalance(path)
       // check for imbalance here
       // insert rotate logic here
     }
   }
   _checkBalance(path) {
     for (let i = path.length - 1; i > 0; i--) {
-      console.log(this._checkDepth(path[i]))
+      const depth = {}
+      const node = path[i]
+      if (node.left) depth.left = this._checkDepth(node.left)
+      if (node.right) depth.right = this._checkDepth(node.right)
+      console.log(depth)
+      if (depth.right > 1) {
+        this._rotateRight(node)
+      }
+      if (depth.left > 1) {
+      }
+      // if balance num is over 1 rotate
     }
     // start at end of path, check balance
     // ? recursive call
   }
+  _rotateRight(node) {
+    const temp = node.value
+    node.value = node.right.value
+    node.right.value = temp
+
+    node.left = node.right
+    node.right = node.right.right
+    node.left.right = null
+
+    // take node, swap value with first child
+    // then set self as left or right child
+    // take chi
+  }
+
+  _rotateLeft(node) {
+    const temp = node.value
+    node.value = node.right.value
+    node.right.value = temp
+
+    node.left = node.right
+    node.right = node.right.right
+    node.left.right = null
+    // take node, swap value with first child
+    // then set self as left or right child
+    // take chi
+  }
   _checkDepth(node) {
     // checks depth of a diven node
-    if (!node.left && !node.right) return 0
+    if (!node.left && !node.right) return 1
     if (!node.left) return this._checkDepth(node.right) + 1
     if (!node.right) return this._checkDepth(node.left) + 1
     const left = this._checkDepth(node.left)
     const right = this._checkDepth(node.right)
     return left < right ? right + 1 : left + 1
   }
-  _rotate() {}
 }
 
 class Node {
@@ -92,7 +128,7 @@ class Node {
 
 // unit tests
 // do not modify the below code
-describe.skip('AVL Tree', function () {
+describe('AVL Tree', function () {
   test('creates a correct tree', () => {
     const nums = [3, 7, 4, 6, 5, 1, 10, 2, 9, 8]
     const tree = new Tree()

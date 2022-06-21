@@ -64,16 +64,20 @@ class Tree {
     }
   }
   _checkBalance(path) {
-    for (let i = path.length - 1; i > 0; i--) {
+    for (let i = path.length - 1; i >= 0; i--) {
       const depth = {}
       const node = path[i]
+      console.log(node)
       if (node.left) depth.left = this._checkDepth(node.left)
       if (node.right) depth.right = this._checkDepth(node.right)
-      console.log(depth)
+      // console.log(depth)
       if (depth.right > 1) {
         this._rotateRight(node)
+        break
       }
       if (depth.left > 1) {
+        this._rotateLeft(node)
+        break
       }
       // if balance num is over 1 rotate
     }
@@ -81,6 +85,14 @@ class Tree {
     // ? recursive call
   }
   _rotateRight(node) {
+    if (node.right.left) {
+      const left = node.right.left.value
+      node.right.left.value = node.right.value
+      node.right.value = left
+
+      node.right.right = node.right.left
+      node.right.left = null
+    }
     const temp = node.value
     node.value = node.right.value
     node.right.value = temp
@@ -95,13 +107,21 @@ class Tree {
   }
 
   _rotateLeft(node) {
-    const temp = node.value
-    node.value = node.right.value
-    node.right.value = temp
+    if (node.left.right) {
+      const right = node.left.right.value
+      node.left.right.value = node.left.value
+      node.left.value = right
 
-    node.left = node.right
-    node.right = node.right.right
-    node.left.right = null
+      node.left.left = node.left.right
+      node.left.right = null
+    }
+    const temp = node.value
+    node.value = node.left.value
+    node.left.value = temp
+
+    node.right = node.left
+    node.left = node.left.left
+    node.right.left = null
     // take node, swap value with first child
     // then set self as left or right child
     // take chi
@@ -114,6 +134,9 @@ class Tree {
     const left = this._checkDepth(node.left)
     const right = this._checkDepth(node.right)
     return left < right ? right + 1 : left + 1
+  }
+  toObject() {
+    return this.root
   }
 }
 

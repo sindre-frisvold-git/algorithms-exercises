@@ -1,19 +1,26 @@
 const breadthFirstTraverse = (queue, array) => {
   // take first item in queue
   if (!queue.length) return array
+
   const node = queue.shift()
   array.push(node.value)
-  if (node.left) {
-    queue.push(node.left)
-  }
-  if (node.right) {
-    queue.push(node.right)
-  }
+  if (node.left) queue.push(node.left)
+  if (node.right) queue.push(node.right)
   return breadthFirstTraverse(queue, array)
   // add value to array
   // add left and right child to queue
   // shift array and call recursion on returned node
   // fill code in here
+}
+
+const itterativeBreadthFirst = (queue, array) => {
+  while (queue.length) {
+    const node = queue.shift()
+    array.push(node.value)
+    if (node.left) queue.push(node.left)
+    if (node.right) queue.push(node.right)
+  }
+  return array
 }
 
 // unit tests
@@ -68,5 +75,8 @@ describe('breadth-first tree traversal', function () {
 
   test('breadthFirstTraverse', () => {
     expect(breadthFirstTraverse([tree], [])).toEqual(answer)
+  })
+  test('itterative', () => {
+    expect(itterativeBreadthFirst([tree], [])).toEqual(answer)
   })
 })

@@ -61,6 +61,23 @@ class LinkedList {
     }
     return node.value
   }
+  delete(index) {
+    let node = this.head
+    for (let i = 0; i < index; i++) {
+      node = node.next
+    }
+    if (index === this.length - 1) {
+      node.prev.next = null
+      this.tail = node.prev
+    } else if (index === 0) {
+      this.head = node.next
+    } else {
+      node.prev.next = node.next
+      node.next.prev = node.prev
+    }
+    this.length--
+    return node.value
+  }
 }
 
 class Node {

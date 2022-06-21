@@ -16,6 +16,8 @@ right - Node/object - the right node which itself may be another tree
 
 */
 
+// TODO add delete method
+
 class Tree {
   constructor() {
     this.root = null

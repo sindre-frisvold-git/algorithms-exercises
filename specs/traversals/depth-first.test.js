@@ -16,10 +16,32 @@ const preorderTraverse = (node, array) => {
 }
 
 const inorderTraverse = (node, array) => {
+  // traverse tree
+  // if node has no left child, push value
+  // then check right child
+  // then push value
+  // return array
+
+  if (node.left) {
+    inorderTraverse(node.left, array)
+  }
+  array.push(node.value)
+  if (node.right) {
+    inorderTraverse(node.right, array)
+  }
+  return array
   // code goes here
 }
 
 const postorderTraverse = (node, array) => {
+  if (node.left) {
+    postorderTraverse(node.left, array)
+  }
+  if (node.right) {
+    postorderTraverse(node.right, array)
+  }
+  array.push(node.value)
+  return array
   // code goes here
 }
 
